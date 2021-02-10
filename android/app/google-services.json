@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1091722730927",
+    "project_id": "beaconsns-e1c45",
+    "storage_bucket": "beaconsns-e1c45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091722730927:android:d9d90c5580f77429c5e35a",
+        "android_client_info": {
+          "package_name": "tomo.made.beacon_sns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091722730927-6gcr9nsp9cas05bmivt3mlsn7r0o8s7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tomo.made.beacon_sns",
+            "certificate_hash": "32e8d5354bd0c083fc86720ec5d74f205ed65b17"
+          }
+        },
+        {
+          "client_id": "1091722730927-r92ni03iu4jqbjoll6o3o36ks7msqu4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUgXjw8nOYgu7McDWDtSy4mUvNzywfcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091722730927-r92ni03iu4jqbjoll6o3o36ks7msqu4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
