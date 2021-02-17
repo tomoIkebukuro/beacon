@@ -4,7 +4,6 @@ import 'package:beacon_sns/repository/auth.dart';
 import 'package:beacon_sns/repository/server.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -28,8 +27,7 @@ class _SettingState extends State<SettingPage> {
             RaisedButton(
               child: Text('signout'),
               onPressed: () async {
-                //await authRepository.signOutWithGoogle();
-                await context.signOut();
+                await authRepository.signOutWithGoogle();
                 userProfile=null;
                 await Navigator.of(context).pushReplacement(
                     MaterialPageRoute<InitialPage>(

@@ -52,7 +52,7 @@ dependencies:
   flutter_svg:
   font_awesome_flutter:
   shared_preferences:
-  lit_firebase_auth:
+  firebase_auth_oauth:
 
 dev_dependencies:
   flutter_test:
