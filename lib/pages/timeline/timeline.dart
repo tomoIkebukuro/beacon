@@ -8,6 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'dart:async';
+import 'dart:io';
 
 class TimelinePage extends StatefulWidget {
   @override
@@ -15,13 +18,38 @@ class TimelinePage extends StatefulWidget {
 }
 
 class _TimelinePageState extends State<TimelinePage> {
+  final _refreshController = RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future<void>.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    // monitor network fetch
+    await Future<void>.delayed(Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    //items.add((items.length+1).toString());
+    if (mounted) setState(() {});
+    _refreshController.loadComplete();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(icon: Icon(Icons.refresh), onPressed: (){}),
-          SizedBox(width: 10,),
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              _refreshController.requestRefresh();
+            },
+          ),
+          SizedBox(
+            width: 10,
+          ),
           /*
           FlatButton(
               child: Text(
@@ -72,6 +100,63 @@ class _TimelinePageState extends State<TimelinePage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container();
           }
+          return SmartRefresher(
+            enablePullUp: false,
+            enablePullDown: true,
+            header: ClassicHeader(
+              refreshingText: '周辺を探索中...',
+              completeText: '探索完了',
+              releaseText: '探索する',
+              idleText: '探索する',
+            ),
+            controller: _refreshController,
+            onRefresh: _onRefresh,
+            onLoading: _onLoading,
+            child: ListView.builder(
+              itemCount: snapshot.data.docs.length + 1,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Container(
+                    color: Colors.white,
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            color: Colors.white,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.zoom_out,
+                                color: Colors.deepOrange,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                          Container(
+                            width: 100,
+                            child: Center(child: Text('100km圏内')),
+                          ),
+                          Material(
+                            color: Colors.white,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.zoom_in,
+                                color: Colors.deepOrange,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+                final thread =
+                    Thread.fromJson(snapshot.data.docs[index - 1].data());
+                return CustomThreadTile(thread);
+              },
+            ),
+          );
           return ListView.builder(
             itemCount: snapshot.data.docs.length + 1,
             itemBuilder: (context, index) {

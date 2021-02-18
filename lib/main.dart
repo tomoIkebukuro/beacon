@@ -19,6 +19,7 @@ void main() async {
         locale,
       ],
       theme: ThemeData(
+        accentColor: Colors.deepOrange,
           appBarTheme: AppBarTheme(
             elevation: 0,
             textTheme: ThemeData().textTheme.copyWith(
@@ -32,7 +33,7 @@ void main() async {
           primaryIconTheme:
           ThemeData().primaryIconTheme.copyWith(color: Colors.deepOrange),
           floatingActionButtonTheme:
-          FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
+          const FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
           buttonTheme: const ButtonThemeData(
               buttonColor: Colors.deepOrange,
               textTheme: ButtonTextTheme.primary),

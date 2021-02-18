@@ -53,6 +53,7 @@ dependencies:
   font_awesome_flutter:
   shared_preferences:
   firebase_auth_oauth:
+  pull_to_refresh: 1.6.3
 
 dev_dependencies:
   flutter_test:
