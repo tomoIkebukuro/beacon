@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteButton extends StatefulWidget {
-  FavoriteButton({this.thread});
+  FavoriteButton({this.thread,this.iconColor,this.iconSize,});
   Thread thread;
+  Color iconColor;
+  double iconSize;
   @override
   _FavoriteButtonState createState() => _FavoriteButtonState();
 }
@@ -40,7 +42,8 @@ class _FavoriteButtonState extends State<FavoriteButton> {
       return IconButton(
         icon: Icon(
           Icons.favorite,
-          color: Colors.red,
+          color: widget.iconColor,
+          size: widget.iconSize,
         ),
         onPressed: () =>
             context.read<FavoriteNotifier>().delete(thread: widget.thread),

@@ -47,7 +47,7 @@ Widget CustomThreadTile(Thread thread) {
                         Row(
                           children: [
                             InkWell(
-                              child: Icon(Icons.comment_outlined,color: Colors.red,),
+                              child: Icon(Icons.comment_outlined,color: Colors.deepOrange,),
                             ),
                             Text('100'),
                           ],
@@ -56,19 +56,27 @@ Widget CustomThreadTile(Thread thread) {
                         Row(
                           children: [
                             InkWell(
-                              child: FaIcon(FontAwesomeIcons.fire,color: Colors.red,),
+                              child: FaIcon(FontAwesomeIcons.fire,color: Colors.deepOrange,size: 18,),
                             ),
                             Text(Random().nextInt(100)%2==0?'1.2K':'100'),
                           ],
                           mainAxisSize: MainAxisSize.min,
                         ),
 
-                        FavoriteButton(thread: thread,),
+                        FavoriteButton(thread: thread,iconColor: Colors.deepOrange,),
+                        Row(
+                          children: [
+                            InkWell(
+                              child: Icon(Icons.location_on_outlined,color: Colors.deepOrange,),
+                            ),
+                          ],
+                          mainAxisSize: MainAxisSize.min,
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    width: 50,
+                    width: 30,
                   ),
                 ],
               ),

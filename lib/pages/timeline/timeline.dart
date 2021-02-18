@@ -1,4 +1,5 @@
-import 'package:beacon_sns/class/favorite/favorite.dart';
+import 'dart:async';
+
 import 'package:beacon_sns/class/index.dart';
 import 'package:beacon_sns/common/functions.dart';
 import 'package:beacon_sns/pages/set_thread/set_thread_page.dart';
@@ -9,8 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'dart:async';
-import 'dart:io';
 
 class TimelinePage extends StatefulWidget {
   @override
@@ -103,7 +102,7 @@ class _TimelinePageState extends State<TimelinePage> {
           return SmartRefresher(
             enablePullUp: false,
             enablePullDown: true,
-            header: ClassicHeader(
+            header: const ClassicHeader(
               refreshingText: '周辺を探索中...',
               completeText: '探索完了',
               releaseText: '探索する',
