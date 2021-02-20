@@ -20,11 +20,21 @@ class _$ThreadTearOff {
   _Thread call(
       {@required String name,
       @required Profile authorProfile,
-      @required String id}) {
+      @required String id,
+      @required double longitude,
+      @required double latitude,
+      @required int level1,
+      @required int level2,
+      @required int level3}) {
     return _Thread(
       name: name,
       authorProfile: authorProfile,
       id: id,
+      longitude: longitude,
+      latitude: latitude,
+      level1: level1,
+      level2: level2,
+      level3: level3,
     );
   }
 
@@ -43,6 +53,11 @@ mixin _$Thread {
   String get name;
   Profile get authorProfile;
   String get id;
+  double get longitude;
+  double get latitude; // -9~9
+  int get level1; // -18~18
+  int get level2; // -36~36
+  int get level3;
 
   Map<String, dynamic> toJson();
   $ThreadCopyWith<Thread> get copyWith;
@@ -52,7 +67,15 @@ mixin _$Thread {
 abstract class $ThreadCopyWith<$Res> {
   factory $ThreadCopyWith(Thread value, $Res Function(Thread) then) =
       _$ThreadCopyWithImpl<$Res>;
-  $Res call({String name, Profile authorProfile, String id});
+  $Res call(
+      {String name,
+      Profile authorProfile,
+      String id,
+      double longitude,
+      double latitude,
+      int level1,
+      int level2,
+      int level3});
 
   $ProfileCopyWith<$Res> get authorProfile;
 }
@@ -70,6 +93,11 @@ class _$ThreadCopyWithImpl<$Res> implements $ThreadCopyWith<$Res> {
     Object name = freezed,
     Object authorProfile = freezed,
     Object id = freezed,
+    Object longitude = freezed,
+    Object latitude = freezed,
+    Object level1 = freezed,
+    Object level2 = freezed,
+    Object level3 = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as String,
@@ -77,6 +105,11 @@ class _$ThreadCopyWithImpl<$Res> implements $ThreadCopyWith<$Res> {
           ? _value.authorProfile
           : authorProfile as Profile,
       id: id == freezed ? _value.id : id as String,
+      longitude: longitude == freezed ? _value.longitude : longitude as double,
+      latitude: latitude == freezed ? _value.latitude : latitude as double,
+      level1: level1 == freezed ? _value.level1 : level1 as int,
+      level2: level2 == freezed ? _value.level2 : level2 as int,
+      level3: level3 == freezed ? _value.level3 : level3 as int,
     ));
   }
 
@@ -96,7 +129,15 @@ abstract class _$ThreadCopyWith<$Res> implements $ThreadCopyWith<$Res> {
   factory _$ThreadCopyWith(_Thread value, $Res Function(_Thread) then) =
       __$ThreadCopyWithImpl<$Res>;
   @override
-  $Res call({String name, Profile authorProfile, String id});
+  $Res call(
+      {String name,
+      Profile authorProfile,
+      String id,
+      double longitude,
+      double latitude,
+      int level1,
+      int level2,
+      int level3});
 
   @override
   $ProfileCopyWith<$Res> get authorProfile;
@@ -116,6 +157,11 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
     Object name = freezed,
     Object authorProfile = freezed,
     Object id = freezed,
+    Object longitude = freezed,
+    Object latitude = freezed,
+    Object level1 = freezed,
+    Object level2 = freezed,
+    Object level3 = freezed,
   }) {
     return _then(_Thread(
       name: name == freezed ? _value.name : name as String,
@@ -123,6 +169,11 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
           ? _value.authorProfile
           : authorProfile as Profile,
       id: id == freezed ? _value.id : id as String,
+      longitude: longitude == freezed ? _value.longitude : longitude as double,
+      latitude: latitude == freezed ? _value.latitude : latitude as double,
+      level1: level1 == freezed ? _value.level1 : level1 as int,
+      level2: level2 == freezed ? _value.level2 : level2 as int,
+      level3: level3 == freezed ? _value.level3 : level3 as int,
     ));
   }
 }
@@ -132,10 +183,22 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
 /// @nodoc
 class _$_Thread implements _Thread {
   const _$_Thread(
-      {@required this.name, @required this.authorProfile, @required this.id})
+      {@required this.name,
+      @required this.authorProfile,
+      @required this.id,
+      @required this.longitude,
+      @required this.latitude,
+      @required this.level1,
+      @required this.level2,
+      @required this.level3})
       : assert(name != null),
         assert(authorProfile != null),
-        assert(id != null);
+        assert(id != null),
+        assert(longitude != null),
+        assert(latitude != null),
+        assert(level1 != null),
+        assert(level2 != null),
+        assert(level3 != null);
 
   factory _$_Thread.fromJson(Map<String, dynamic> json) =>
       _$_$_ThreadFromJson(json);
@@ -146,10 +209,20 @@ class _$_Thread implements _Thread {
   final Profile authorProfile;
   @override
   final String id;
+  @override
+  final double longitude;
+  @override
+  final double latitude;
+  @override // -9~9
+  final int level1;
+  @override // -18~18
+  final int level2;
+  @override // -36~36
+  final int level3;
 
   @override
   String toString() {
-    return 'Thread(name: $name, authorProfile: $authorProfile, id: $id)';
+    return 'Thread(name: $name, authorProfile: $authorProfile, id: $id, longitude: $longitude, latitude: $latitude, level1: $level1, level2: $level2, level3: $level3)';
   }
 
   @override
@@ -162,7 +235,19 @@ class _$_Thread implements _Thread {
                 const DeepCollectionEquality()
                     .equals(other.authorProfile, authorProfile)) &&
             (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.longitude, longitude) ||
+                const DeepCollectionEquality()
+                    .equals(other.longitude, longitude)) &&
+            (identical(other.latitude, latitude) ||
+                const DeepCollectionEquality()
+                    .equals(other.latitude, latitude)) &&
+            (identical(other.level1, level1) ||
+                const DeepCollectionEquality().equals(other.level1, level1)) &&
+            (identical(other.level2, level2) ||
+                const DeepCollectionEquality().equals(other.level2, level2)) &&
+            (identical(other.level3, level3) ||
+                const DeepCollectionEquality().equals(other.level3, level3)));
   }
 
   @override
@@ -170,7 +255,12 @@ class _$_Thread implements _Thread {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(authorProfile) ^
-      const DeepCollectionEquality().hash(id);
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(longitude) ^
+      const DeepCollectionEquality().hash(latitude) ^
+      const DeepCollectionEquality().hash(level1) ^
+      const DeepCollectionEquality().hash(level2) ^
+      const DeepCollectionEquality().hash(level3);
 
   @override
   _$ThreadCopyWith<_Thread> get copyWith =>
@@ -186,7 +276,12 @@ abstract class _Thread implements Thread {
   const factory _Thread(
       {@required String name,
       @required Profile authorProfile,
-      @required String id}) = _$_Thread;
+      @required String id,
+      @required double longitude,
+      @required double latitude,
+      @required int level1,
+      @required int level2,
+      @required int level3}) = _$_Thread;
 
   factory _Thread.fromJson(Map<String, dynamic> json) = _$_Thread.fromJson;
 
@@ -196,6 +291,16 @@ abstract class _Thread implements Thread {
   Profile get authorProfile;
   @override
   String get id;
+  @override
+  double get longitude;
+  @override
+  double get latitude;
+  @override // -9~9
+  int get level1;
+  @override // -18~18
+  int get level2;
+  @override // -36~36
+  int get level3;
   @override
   _$ThreadCopyWith<_Thread> get copyWith;
 }
