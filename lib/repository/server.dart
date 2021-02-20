@@ -9,8 +9,24 @@ import 'package:uuid/uuid.dart';
 final serverRepository = ServerRepository();
 
 class ServerRepository {
-  final threadsStream =
-      FirebaseFirestore.instance.collection('threads').snapshots();
+
+  final threadsStream = FirebaseFirestore.instance
+      .collection('threads')
+      .where("latitude", isGreaterThanOrEqualTo: 0)
+      .where("latitude", isLessThanOrEqualTo: 90)
+      .where('level3',whereIn: <int>[-26,-25,-24]).snapshots();
+
+
+  /*
+  final threadsStream = FirebaseFirestore.instance
+      .collection('threads')
+      .where("latitude", isGreaterThanOrEqualTo: 0)
+      .where("latitude", isLessThanOrEqualTo: 90)
+      .where("longitude", isGreaterThanOrEqualTo: -180)
+      .where("longitude", isLessThanOrEqualTo: 180)
+      .snapshots();
+
+   */
 
   Future<void> set({
     String path,
@@ -27,8 +43,8 @@ class ServerRepository {
         .data();
   }
 
-  Future<Thread> getThread({String id})async{
-    return Thread.fromJson(await get(id: id,path: 'threads'));
+  Future<Thread> getThread({String id}) async {
+    return Thread.fromJson(await get(id: id, path: 'threads'));
   }
 
   Future<void> delete({String id, String path}) async {
@@ -42,9 +58,12 @@ class ServerRepository {
     }
   }
 
-  Future<void> deleteProfile()async{
-    await delete(id:userProfile.id,path:'profiles',);
-    userProfile=null;
+  Future<void> deleteProfile() async {
+    await delete(
+      id: userProfile.id,
+      path: 'profiles',
+    );
+    userProfile = null;
   }
 
   Future<String> putFile({File file, String id}) async {
@@ -55,7 +74,7 @@ class ServerRepository {
   }
 
   Stream<QuerySnapshot> getFavoriteThreadsStream({List<String> favorites}) {
-    if((favorites??[]).isEmpty){
+    if ((favorites ?? []).isEmpty) {
       return threadsStream;
     }
     return FirebaseFirestore.instance
