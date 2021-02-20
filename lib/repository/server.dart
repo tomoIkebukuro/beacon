@@ -14,7 +14,7 @@ class ServerRepository {
       .collection('threads')
       .where("latitude", isGreaterThanOrEqualTo: 0)
       .where("latitude", isLessThanOrEqualTo: 90)
-      .where('level3',whereIn: <int>[-26,-25,-24]).snapshots();
+      .where('level3',whereIn: <int>[-27,-26,-25,-24]).where('tags',arrayContains: 'aaaa').snapshots();
 
 
   /*
