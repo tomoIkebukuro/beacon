@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:beacon_sns/class/thread/thread.dart';
 import 'package:beacon_sns/common/functions.dart';
@@ -28,26 +29,18 @@ class SetThreadNotifier extends StateNotifier<SetThreadState> {
       if (!checkIsSetButtonAvailable()) {
         return;
       }
-      final id = Uuid().v4();
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
         timeLimit: const Duration(milliseconds: 5000),
       );
-      final level1 = (position.longitude / 360 * 18).floor();
-      final level2 = (position.longitude / 360 * 36).floor();
-      final level3 = (position.longitude / 360 * 72).floor();
-      final thread = Thread(
-        id: id,
+      final thread = Thread.fromLatLong(
         authorProfile: userProfile,
         name: state.name,
         latitude: position.latitude,
         longitude: position.longitude,
-        level1: level1,
-        level2: level2,
-        level3: level3,
       );
       await serverRepository.set(
-        id: id,
+        id: thread.id,
         path: 'threads',
         data: thread.toJson(),
       );

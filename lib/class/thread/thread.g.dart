@@ -15,9 +15,15 @@ _$_Thread _$_$_ThreadFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     longitude: (json['longitude'] as num)?.toDouble(),
     latitude: (json['latitude'] as num)?.toDouble(),
+    level0: json['level0'] as int,
     level1: json['level1'] as int,
     level2: json['level2'] as int,
     level3: json['level3'] as int,
+    level4: json['level4'] as int,
+    level5: json['level5'] as int,
+    level6: json['level6'] as int,
+    level7: json['level7'] as int,
+    level8: json['level8'] as int,
   );
 }
 
@@ -27,7 +33,13 @@ Map<String, dynamic> _$_$_ThreadToJson(_$_Thread instance) => <String, dynamic>{
       'id': instance.id,
       'longitude': instance.longitude,
       'latitude': instance.latitude,
+      'level0': instance.level0,
       'level1': instance.level1,
       'level2': instance.level2,
       'level3': instance.level3,
+      'level4': instance.level4,
+      'level5': instance.level5,
+      'level6': instance.level6,
+      'level7': instance.level7,
+      'level8': instance.level8,
     };
