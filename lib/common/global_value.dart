@@ -4,3 +4,5 @@ import 'package:beacon_sns/class/thread/thread.dart';
 
 Profile userProfile= Profile();
 List<Thread> favorites=[];
+double currentLatitude;
+double currentLongitude;

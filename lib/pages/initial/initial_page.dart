@@ -136,6 +136,30 @@ class _InitialPageState extends State<InitialPage> {
     return;
   }
 
+  Future<void> checkGeoLocation() async {
+    // ignore: literal_only_boolean_expressions
+    while (true) {
+      try {
+        final position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+          timeLimit: const Duration(milliseconds: 5000),
+        );
+        if (position != null) {
+          currentLatitude = position.latitude;
+          currentLongitude = position.longitude;
+          break;
+        }
+        // ignore: avoid_catches_without_on_clauses
+      } catch (e) {
+        await showCustomDialog(
+            context: context,
+            title: 'エラー',
+            discription: "位置情報を取得できません。¥nアプリを使用するには位置情報をオンにしてください。");
+      }
+    }
+    return;
+  }
+
   Future<void> checkFavorites() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -157,6 +181,29 @@ class _InitialPageState extends State<InitialPage> {
     return;
   }
 
+  Future<void> checkTimeline() async {
+    while (true) {
+      try {
+        final data = await serverRepository.get(id: 'status', path: 'app');
+        if (data['version'] != 1) {
+          await showCustomDialog(
+            context: context,
+            title: 'エラー',
+            discription: 'アップデートしてください',
+          );
+        } else {
+          break;
+        }
+      } on Exception catch (e) {
+        await showCustomDialog(
+          context: context,
+          title: 'エラー',
+          discription: 'サーバに接続できません。',
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback(
@@ -170,6 +217,8 @@ class _InitialPageState extends State<InitialPage> {
         await checkUser();
         await checkUserProfile();
         await checkPermission();
+        await checkGeoLocation();
+        await checkTimeline();
         await checkFavorites();
         await Navigator.of(context).pushReplacement(MaterialPageRoute<HomePage>(
             builder: (context) => HomePage.wrapped()));
