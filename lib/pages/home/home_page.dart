@@ -1,4 +1,6 @@
 import 'package:beacon_sns/class/favorite/favorite.dart';
+import 'package:beacon_sns/class/geoquery_range/geoquery_range_notifier.dart';
+import 'package:beacon_sns/class/geoquery_range/geoquery_range_state.dart';
 import 'package:beacon_sns/class/timeline/timeline_notifier.dart';
 import 'package:beacon_sns/class/timeline/timeline_state.dart';
 import 'package:beacon_sns/common/global_value.dart';
@@ -25,8 +27,8 @@ class HomePage extends StatefulWidget {
         StateNotifierProvider<FavoriteNotifier, Favorite>(
           create: (context) => FavoriteNotifier(threads: favorites),
         ),
-        StateNotifierProvider<TimelineNotifier,TimelineState>(
-          create: (context) => TimelineNotifier(),
+        StateNotifierProvider<GeoqueryRangeNotifier,GeoqueryRangeState>(
+          create: (context) => GeoqueryRangeNotifier(),
         ),
       ],
       child:  HomePage(),

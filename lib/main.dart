@@ -1,45 +1,58 @@
+import 'package:beacon_sns/pages/home/home_notifier.dart';
 import 'package:beacon_sns/pages/initial/initial_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:provider/provider.dart';
+
+import 'class/timeline/timeline_notifier.dart';
+import 'class/timeline/timeline_state.dart';
 
 const locale = Locale("ja", "JP");
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    MaterialApp(
-      locale: locale,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    MultiProvider(
+      providers: [
+        StateNotifierProvider<TimelineNotifier,TimelineState>(
+          create: (context) => TimelineNotifier(),
+        ),
       ],
-      supportedLocales: const [
-        locale,
-      ],
-      theme: ThemeData(
-        accentColor: Colors.deepOrange,
-          appBarTheme: AppBarTheme(
-            elevation: 0,
-            textTheme: ThemeData().textTheme.copyWith(
-                headline6: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold)),
-            centerTitle: true,
-            color: Colors.white,
-          ),
-          primaryIconTheme:
-          ThemeData().primaryIconTheme.copyWith(color: Colors.deepOrange),
-          floatingActionButtonTheme:
-          const FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
-          buttonTheme: const ButtonThemeData(
-              buttonColor: Colors.deepOrange,
-              textTheme: ButtonTextTheme.primary),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              selectedItemColor: Colors.deepOrange)),
-      home: const InitialPage(),
+      child: MaterialApp(
+        locale: locale,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          locale,
+        ],
+        theme: ThemeData(
+          accentColor: Colors.deepOrange,
+            appBarTheme: AppBarTheme(
+              elevation: 0,
+              textTheme: ThemeData().textTheme.copyWith(
+                  headline6: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold)),
+              centerTitle: true,
+              color: Colors.white,
+            ),
+            primaryIconTheme:
+            ThemeData().primaryIconTheme.copyWith(color: Colors.deepOrange),
+            floatingActionButtonTheme:
+            const FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
+            buttonTheme: const ButtonThemeData(
+                buttonColor: Colors.deepOrange,
+                textTheme: ButtonTextTheme.primary),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                selectedItemColor: Colors.deepOrange)),
+        home: const InitialPage(),
+      ),
     ),
   );
 }

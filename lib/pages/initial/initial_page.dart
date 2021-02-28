@@ -1,5 +1,6 @@
 import 'package:beacon_sns/class/profile/profile.dart';
 import 'package:beacon_sns/class/thread/thread.dart';
+import 'package:beacon_sns/class/timeline/timeline_notifier.dart';
 import 'package:beacon_sns/common/functions.dart';
 import 'package:beacon_sns/common/global_value.dart';
 import 'package:beacon_sns/pages/home/home_page.dart';
@@ -16,6 +17,7 @@ import 'package:geolocator/geolocator.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beacon_sns/main.dart';
+import 'package:provider/provider.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({
@@ -182,18 +184,16 @@ class _InitialPageState extends State<InitialPage> {
   }
 
   Future<void> checkTimeline() async {
+    // ignore: literal_only_boolean_expressions
     while (true) {
       try {
-        final data = await serverRepository.get(id: 'status', path: 'app');
-        if (data['version'] != 1) {
-          await showCustomDialog(
-            context: context,
-            title: 'エラー',
-            discription: 'アップデートしてください',
-          );
-        } else {
+        final threads =await serverRepository.getGeoQuery(
+            latitude: currentLatitude, longitude: currentLongitude, level: 8);
+        if(threads!=null){
+          context.read<TimelineNotifier>().updateTimeline(threads: threads);
           break;
         }
+
       } on Exception catch (e) {
         await showCustomDialog(
           context: context,
@@ -202,6 +202,7 @@ class _InitialPageState extends State<InitialPage> {
         );
       }
     }
+    return;
   }
 
   @override

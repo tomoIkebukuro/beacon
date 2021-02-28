@@ -14,7 +14,7 @@ class _$TimelineStateTearOff {
   const _$TimelineStateTearOff();
 
 // ignore: unused_element
-  _TimelineState call({@required List<Thread> threads}) {
+  _TimelineState call({List<Thread> threads = const <Thread>[]}) {
     return _TimelineState(
       threads: threads,
     );
@@ -92,8 +92,10 @@ class __$TimelineStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_TimelineState implements _TimelineState {
-  const _$_TimelineState({@required this.threads}) : assert(threads != null);
+  const _$_TimelineState({this.threads = const <Thread>[]})
+      : assert(threads != null);
 
+  @JsonKey(defaultValue: const <Thread>[])
   @override
   final List<Thread> threads;
 
@@ -120,8 +122,7 @@ class _$_TimelineState implements _TimelineState {
 }
 
 abstract class _TimelineState implements TimelineState {
-  const factory _TimelineState({@required List<Thread> threads}) =
-      _$_TimelineState;
+  const factory _TimelineState({List<Thread> threads}) = _$_TimelineState;
 
   @override
   List<Thread> get threads;

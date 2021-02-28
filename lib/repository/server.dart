@@ -76,10 +76,10 @@ class ServerRepository {
         .snapshots();
   }
 
-  Future<List<Thread>> getGeoQuery(
+  Future<List<Thread>> getGeoQuery({
     double latitude,
     double longitude,
-    int level,
+    int level,}
   ) async {
     final currentAddress =
         (latitude/180 * (pi*earthRadius / pow(10, level - 1)).floor()  ).floor();
