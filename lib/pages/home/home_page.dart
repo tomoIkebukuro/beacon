@@ -7,7 +7,7 @@ import 'package:beacon_sns/pages/favorite/favorite_page.dart';
 import 'package:beacon_sns/pages/home/home_state.dart';
 import 'package:beacon_sns/pages/map/map_page.dart';
 import 'package:beacon_sns/pages/profile/profile_page.dart';
-import 'package:beacon_sns/pages/timeline/timeline.dart';
+import 'package:beacon_sns/pages/timeline/timeline_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
