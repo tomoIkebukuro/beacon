@@ -59,9 +59,11 @@ class _SetThreadPageState extends State<SetThreadPage> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               onPressed: state.isSetButtonAvailable
-                  ? () => context
-                      .read<SetThreadNotifier>()
-                      .onSetButtonPressed(context)
+                  ? () {
+                      context
+                          .read<SetThreadNotifier>()
+                          .onSetButtonPressed(context);
+                    }
                   : null,
             ),
           ],

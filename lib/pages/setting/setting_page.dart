@@ -1,3 +1,4 @@
+import 'package:beacon_sns/class/profile/profile.dart';
 import 'package:beacon_sns/common/global_value.dart';
 import 'package:beacon_sns/pages/initial/initial_page.dart';
 import 'package:beacon_sns/repository/auth.dart';
@@ -28,7 +29,7 @@ class _SettingState extends State<SettingPage> {
               child: Text('signout'),
               onPressed: () async {
                 await authRepository.signOutWithGoogle();
-                userProfile=null;
+                userProfile=Profile();
                 await Navigator.of(context).pushReplacement(
                     MaterialPageRoute<InitialPage>(
                         builder: (_) => InitialPage()));

@@ -49,6 +49,7 @@ class SetThreadNotifier extends StateNotifier<SetThreadState> {
       print(e);
       await showCustomDialog(
           context: context, title: 'エラー', discription: 'ビーコンの設置に失敗しました。');
+      return;
     }
 
     return;

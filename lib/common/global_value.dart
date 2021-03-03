@@ -6,3 +6,8 @@ Profile userProfile= Profile();
 List<Thread> favorites=[];
 double currentLatitude;
 double currentLongitude;
+
+enum SortWith{
+  createdAt,
+  buzz,
+}

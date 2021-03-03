@@ -3,9 +3,12 @@ import 'package:beacon_sns/pages/initial/initial_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 
+import 'class/geoquery_range/geoquery_range_notifier.dart';
+import 'class/geoquery_range/geoquery_range_state.dart';
 import 'class/timeline/timeline_notifier.dart';
 import 'class/timeline/timeline_state.dart';
 
@@ -14,12 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    MultiProvider(
-      providers: [
-        StateNotifierProvider<TimelineNotifier,TimelineState>(
-          create: (context) => TimelineNotifier(),
-        ),
-      ],
+    ProviderScope(
       child: MaterialApp(
         locale: locale,
         localizationsDelegates: const [
@@ -31,7 +29,7 @@ void main() async {
           locale,
         ],
         theme: ThemeData(
-          accentColor: Colors.deepOrange,
+            accentColor: Colors.deepOrange,
             appBarTheme: AppBarTheme(
               elevation: 0,
               textTheme: ThemeData().textTheme.copyWith(

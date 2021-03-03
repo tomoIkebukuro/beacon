@@ -54,6 +54,7 @@ dependencies:
   shared_preferences:
   firebase_auth_oauth:
   pull_to_refresh: 1.6.3
+  flutter_riverpod:
 
 dev_dependencies:
   flutter_test:

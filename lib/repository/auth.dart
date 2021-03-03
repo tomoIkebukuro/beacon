@@ -32,7 +32,7 @@ class AuthRepository {
 
 
   Future<void> signOutWithGoogle()async{
-    //googleUser.
+    await GoogleSignIn().signOut();
     await instance.signOut();
   }
 }

@@ -14,9 +14,10 @@ class _$GeoqueryRangeStateTearOff {
   const _$GeoqueryRangeStateTearOff();
 
 // ignore: unused_element
-  _GeoqueryRangeState call({int level = 8}) {
+  _GeoqueryRangeState call({int level = 8, String symbol = ''}) {
     return _GeoqueryRangeState(
       level: level,
+      symbol: symbol,
     );
   }
 }
@@ -28,6 +29,7 @@ const $GeoqueryRangeState = _$GeoqueryRangeStateTearOff();
 /// @nodoc
 mixin _$GeoqueryRangeState {
   int get level;
+  String get symbol;
 
   $GeoqueryRangeStateCopyWith<GeoqueryRangeState> get copyWith;
 }
@@ -37,7 +39,7 @@ abstract class $GeoqueryRangeStateCopyWith<$Res> {
   factory $GeoqueryRangeStateCopyWith(
           GeoqueryRangeState value, $Res Function(GeoqueryRangeState) then) =
       _$GeoqueryRangeStateCopyWithImpl<$Res>;
-  $Res call({int level});
+  $Res call({int level, String symbol});
 }
 
 /// @nodoc
@@ -52,9 +54,11 @@ class _$GeoqueryRangeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object level = freezed,
+    Object symbol = freezed,
   }) {
     return _then(_value.copyWith(
       level: level == freezed ? _value.level : level as int,
+      symbol: symbol == freezed ? _value.symbol : symbol as String,
     ));
   }
 }
@@ -66,7 +70,7 @@ abstract class _$GeoqueryRangeStateCopyWith<$Res>
           _GeoqueryRangeState value, $Res Function(_GeoqueryRangeState) then) =
       __$GeoqueryRangeStateCopyWithImpl<$Res>;
   @override
-  $Res call({int level});
+  $Res call({int level, String symbol});
 }
 
 /// @nodoc
@@ -83,24 +87,31 @@ class __$GeoqueryRangeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object level = freezed,
+    Object symbol = freezed,
   }) {
     return _then(_GeoqueryRangeState(
       level: level == freezed ? _value.level : level as int,
+      symbol: symbol == freezed ? _value.symbol : symbol as String,
     ));
   }
 }
 
 /// @nodoc
 class _$_GeoqueryRangeState implements _GeoqueryRangeState {
-  const _$_GeoqueryRangeState({this.level = 8}) : assert(level != null);
+  const _$_GeoqueryRangeState({this.level = 8, this.symbol = ''})
+      : assert(level != null),
+        assert(symbol != null);
 
   @JsonKey(defaultValue: 8)
   @override
   final int level;
+  @JsonKey(defaultValue: '')
+  @override
+  final String symbol;
 
   @override
   String toString() {
-    return 'GeoqueryRangeState(level: $level)';
+    return 'GeoqueryRangeState(level: $level, symbol: $symbol)';
   }
 
   @override
@@ -108,12 +119,16 @@ class _$_GeoqueryRangeState implements _GeoqueryRangeState {
     return identical(this, other) ||
         (other is _GeoqueryRangeState &&
             (identical(other.level, level) ||
-                const DeepCollectionEquality().equals(other.level, level)));
+                const DeepCollectionEquality().equals(other.level, level)) &&
+            (identical(other.symbol, symbol) ||
+                const DeepCollectionEquality().equals(other.symbol, symbol)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(level);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(level) ^
+      const DeepCollectionEquality().hash(symbol);
 
   @override
   _$GeoqueryRangeStateCopyWith<_GeoqueryRangeState> get copyWith =>
@@ -121,10 +136,13 @@ class _$_GeoqueryRangeState implements _GeoqueryRangeState {
 }
 
 abstract class _GeoqueryRangeState implements GeoqueryRangeState {
-  const factory _GeoqueryRangeState({int level}) = _$_GeoqueryRangeState;
+  const factory _GeoqueryRangeState({int level, String symbol}) =
+      _$_GeoqueryRangeState;
 
   @override
   int get level;
+  @override
+  String get symbol;
   @override
   _$GeoqueryRangeStateCopyWith<_GeoqueryRangeState> get copyWith;
 }

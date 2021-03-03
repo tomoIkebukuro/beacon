@@ -27,9 +27,7 @@ class HomePage extends StatefulWidget {
         StateNotifierProvider<FavoriteNotifier, Favorite>(
           create: (context) => FavoriteNotifier(threads: favorites),
         ),
-        StateNotifierProvider<GeoqueryRangeNotifier,GeoqueryRangeState>(
-          create: (context) => GeoqueryRangeNotifier(),
-        ),
+
       ],
       child:  HomePage(),
     );

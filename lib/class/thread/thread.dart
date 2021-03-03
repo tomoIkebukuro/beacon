@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:beacon_sns/class/profile/profile.dart';
+import 'package:beacon_sns/common/functions.dart';
+import 'package:beacon_sns/common/global_value.dart';
 import 'package:beacon_sns/repository/server.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -36,9 +38,10 @@ abstract class Thread with _$Thread {
     final id = Uuid().v4();
     final levels = <int>[];
     for (var level = 0; level <= 8; level += 1) {
-      levels.add(
-          (latitude / 180 * (pi * earthRadius / pow(10, level - 1)))
-              .floor());
+      levels.add(getGeoqueryAddress(
+          latitude: currentLatitude,
+          longitude: currentLongitude,
+          level: level));
     }
     return Thread(
       name: name,

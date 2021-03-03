@@ -1,17 +1,21 @@
 import 'dart:async';
 
+import 'package:beacon_sns/class/geoquery_range/geoquery_range_notifier.dart';
 import 'package:beacon_sns/class/index.dart';
 import 'package:beacon_sns/class/timeline/timeline_state.dart';
 import 'package:beacon_sns/common/functions.dart';
+import 'package:beacon_sns/common/global_value.dart';
 import 'package:beacon_sns/pages/set_thread/set_thread_page.dart';
+import 'package:beacon_sns/providers.dart';
 import 'package:beacon_sns/repository/server.dart';
 import 'package:beacon_sns/widgets/custom_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:provider/provider.dart';
+import 'package:riverpod/riverpod.dart';
 
 class TimelinePage extends StatefulWidget {
   @override
@@ -39,7 +43,6 @@ class _TimelinePageState extends State<TimelinePage> {
 
   @override
   Widget build(BuildContext context) {
-    final threads=context.watch<TimelineState>().threads;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -99,46 +102,98 @@ class _TimelinePageState extends State<TimelinePage> {
         controller: _refreshController,
         onRefresh: _onRefresh,
         onLoading: _onLoading,
-        child: ListView.builder(
-          itemCount: threads.length + 1,
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return Container(
-                color: Colors.white,
-                child: Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Material(
-                        color: Colors.white,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.zoom_out,
-                            color: Colors.deepOrange,
+        child: Consumer(
+          builder: (context, watch, child) {
+            final threads = watch(timelineProvider).state.threads;
+            return ListView.builder(
+              itemCount: threads.length + 1,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Container(
+                    color: Colors.white,
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('範囲：'),
+                          Consumer(
+                            builder: (context, watch, child) {
+                              return DropdownButton<String>(
+                                value:
+                                    watch(geoQueryRangeProvider.state).symbol,
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconSize: 24,
+                                elevation: 16,
+                                //style: TextStyle(color: Colors.deepPurple),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.deepOrange,
+                                ),
+                                onChanged: (String newValue) async {
+                                  final level = context
+                                      .read(geoQueryRangeProvider.state)
+                                      .level;
+                                  try{
+                                    await context.read(timelineProvider).update(
+                                      currentLatitude: currentLatitude,
+                                      currentLongitude: currentLongitude,
+                                      level: level,
+                                      sortWith: SortWith.buzz,
+                                    );
+                                  }
+                                  catch(e){
+                                  }
+
+                                  await context
+                                      .read(geoQueryRangeProvider)
+                                      .update(symbol: newValue);
+                                },
+                                items: GeoqueryRangeNotifier.availableSymbol
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              );
+                            },
                           ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Container(
-                        width: 100,
-                        child: Center(child: Text('100km圏内')),
-                      ),
-                      Material(
-                        color: Colors.white,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.zoom_in,
-                            color: Colors.deepOrange,
+                          Text('   並び順：'),
+                          Consumer(
+                            builder: (context, watch, child) {
+                              return DropdownButton<String>(
+                                value:
+                                '評価順',
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconSize: 24,
+                                elevation: 16,
+                                //style: TextStyle(color: Colors.deepPurple),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.deepOrange,
+                                ),
+                                onChanged: (String newValue) async {
+                                },
+                                items: ['評価順','新しい順']
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value,style: TextStyle(fontSize: 15),),
+                                      );
+                                    }).toList(),
+                              );
+                            },
                           ),
-                          onPressed: () {},
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              );
-            }
-            return CustomThreadTile(threads[index - 1]);
+                    ),
+                  );
+                }
+                return CustomThreadTile(threads[index - 1]);
+              },
+            );
           },
         ),
       ),

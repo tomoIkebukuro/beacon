@@ -2,9 +2,11 @@ import 'dart:io';
 import 'dart:math';
 import 'package:beacon_sns/class/profile/profile.dart';
 import 'package:beacon_sns/class/thread/thread.dart';
+import 'package:beacon_sns/common/functions.dart';
 import 'package:beacon_sns/common/global_value.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
 final serverRepository = ServerRepository();
@@ -51,38 +53,16 @@ class ServerRepository {
     return Thread.fromJson(await get(id: id, path: 'threads'));
   }
 
-  Stream<QuerySnapshot> geoQueryStream({
-    double latitude,
-    double longitude,
-    int level,
-    bool sortWithTime,
-  }) {
-    if (sortWithTime) {
-      return FirebaseFirestore.instance
-          .collection('threads')
-          .where("latitude", isGreaterThanOrEqualTo: 0)
-          .where("latitude", isLessThanOrEqualTo: 90)
-          .where('level$level', whereIn: <int>[-27, -26, -25, -24])
-          .orderBy('createAt')
-          .limit(30)
-          .snapshots();
-    }
-    return FirebaseFirestore.instance
-        .collection('threads')
-        .where("latitude", isGreaterThanOrEqualTo: 0)
-        .where("latitude", isLessThanOrEqualTo: 90)
-        .where('level$level', whereIn: <int>[-27, -26, -25, -24])
-        .limit(30)
-        .snapshots();
-  }
 
   Future<List<Thread>> getGeoQuery({
     double latitude,
     double longitude,
-    int level,}
+    int level,
+    @required SortWith sortWith,
+  }
   ) async {
     final currentAddress =
-        (latitude/180 * (pi*earthRadius / pow(10, level - 1)).floor()  ).floor();
+        getGeoqueryAddress(latitude: currentLatitude,longitude: currentLongitude,level: level);
     final latitudeRange = <int>[currentAddress];
     for (var i = 0; i < 4; i += 1) {
       latitudeRange..add(currentAddress + i)..add(currentAddress - i);
@@ -90,13 +70,25 @@ class ServerRepository {
     //　完璧!!
     final longitudeDiff = (pow(10, level) * 360) /
         (2 * pi * earthRadius * cos(2 * pi * latitude / 360))/2;
-    final query = await FirebaseFirestore.instance
-        .collection('threads')
-        .where("longitude", isGreaterThanOrEqualTo: longitude-longitudeDiff)
-        .where("longitude", isLessThanOrEqualTo: longitude+longitudeDiff)
-        .where('level$level', whereIn: latitudeRange)
-        .limit(20)
-        .get();
+    QuerySnapshot query ;
+    if(sortWith==SortWith.buzz){
+      query= await FirebaseFirestore.instance
+          .collection('threads')
+          .where("longitude", isGreaterThanOrEqualTo: longitude-longitudeDiff)
+          .where("longitude", isLessThanOrEqualTo: longitude+longitudeDiff)
+          .where('level$level', whereIn: latitudeRange).orderBy('buzz')
+          .limit(20)
+          .get();
+    }
+    else{
+      query= await FirebaseFirestore.instance
+          .collection('threads')
+          .where("longitude", isGreaterThanOrEqualTo: longitude-longitudeDiff)
+          .where("longitude", isLessThanOrEqualTo: longitude+longitudeDiff)
+          .where('level$level', whereIn: latitudeRange).orderBy('createdAt')
+          .limit(20)
+          .get();
+    }
     final threads = <Thread>[];
     for (final doc in query.docs) {
       threads.add(Thread.fromJson(doc.data()));

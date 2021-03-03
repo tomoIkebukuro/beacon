@@ -1,3 +1,4 @@
+import 'package:beacon_sns/class/geoquery_range/geoquery_range_state.dart';
 import 'package:beacon_sns/class/profile/profile.dart';
 import 'package:beacon_sns/class/thread/thread.dart';
 import 'package:beacon_sns/class/timeline/timeline_notifier.dart';
@@ -12,12 +13,16 @@ import 'package:beacon_sns/widgets/custom_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:convert';
+import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beacon_sns/main.dart';
-import 'package:provider/provider.dart';
+import 'package:riverpod/riverpod.dart';
+
+import '../../providers.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({
@@ -80,6 +85,7 @@ class _InitialPageState extends State<InitialPage> {
             discription: 'firebase authentication');
       }
     }
+    return;
   }
 
   // Done
@@ -184,17 +190,20 @@ class _InitialPageState extends State<InitialPage> {
   }
 
   Future<void> checkTimeline() async {
+    //TODO:
+    final level = 8;
     // ignore: literal_only_boolean_expressions
     while (true) {
       try {
-        final threads =await serverRepository.getGeoQuery(
-            latitude: currentLatitude, longitude: currentLongitude, level: 8);
-        if(threads!=null){
-          context.read<TimelineNotifier>().updateTimeline(threads: threads);
-          break;
-        }
-
+        context.read(timelineProvider).update(
+              currentLatitude: currentLatitude,
+              currentLongitude: currentLongitude,
+              level: level,
+              sortWith: SortWith.buzz,
+            );
+        break;
       } on Exception catch (e) {
+        print(e);
         await showCustomDialog(
           context: context,
           title: 'エラー',

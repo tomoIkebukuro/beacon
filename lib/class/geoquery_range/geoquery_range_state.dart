@@ -12,5 +12,6 @@ part 'geoquery_range_state.freezed.dart';
 abstract class GeoqueryRangeState with _$GeoqueryRangeState {
   const factory GeoqueryRangeState({
     @Default(8) int level,
+    @required String symbol,
   }) = _GeoqueryRangeState;
 }
