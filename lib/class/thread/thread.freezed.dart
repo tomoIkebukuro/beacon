@@ -23,21 +23,23 @@ class _$ThreadTearOff {
       @required String id,
       @required double longitude,
       @required double latitude,
-      @required int level0,
-      @required int level1,
-      @required int level2,
-      @required int level3,
-      @required int level4,
-      @required int level5,
-      @required int level6,
-      @required int level7,
-      @required int level8}) {
+      @TimestampConverter() DateTime createdAt,
+      @required String level0,
+      @required String level1,
+      @required String level2,
+      @required String level3,
+      @required String level4,
+      @required String level5,
+      @required String level6,
+      @required String level7,
+      @required String level8}) {
     return _Thread(
       name: name,
       authorProfile: authorProfile,
       id: id,
       longitude: longitude,
       latitude: latitude,
+      createdAt: createdAt,
       level0: level0,
       level1: level1,
       level2: level2,
@@ -67,15 +69,17 @@ mixin _$Thread {
   String get id;
   double get longitude;
   double get latitude;
-  int get level0;
-  int get level1;
-  int get level2;
-  int get level3;
-  int get level4;
-  int get level5;
-  int get level6;
-  int get level7;
-  int get level8;
+  @TimestampConverter()
+  DateTime get createdAt;
+  String get level0;
+  String get level1;
+  String get level2;
+  String get level3;
+  String get level4;
+  String get level5;
+  String get level6;
+  String get level7;
+  String get level8;
 
   Map<String, dynamic> toJson();
   $ThreadCopyWith<Thread> get copyWith;
@@ -91,15 +95,16 @@ abstract class $ThreadCopyWith<$Res> {
       String id,
       double longitude,
       double latitude,
-      int level0,
-      int level1,
-      int level2,
-      int level3,
-      int level4,
-      int level5,
-      int level6,
-      int level7,
-      int level8});
+      @TimestampConverter() DateTime createdAt,
+      String level0,
+      String level1,
+      String level2,
+      String level3,
+      String level4,
+      String level5,
+      String level6,
+      String level7,
+      String level8});
 
   $ProfileCopyWith<$Res> get authorProfile;
 }
@@ -119,6 +124,7 @@ class _$ThreadCopyWithImpl<$Res> implements $ThreadCopyWith<$Res> {
     Object id = freezed,
     Object longitude = freezed,
     Object latitude = freezed,
+    Object createdAt = freezed,
     Object level0 = freezed,
     Object level1 = freezed,
     Object level2 = freezed,
@@ -137,15 +143,17 @@ class _$ThreadCopyWithImpl<$Res> implements $ThreadCopyWith<$Res> {
       id: id == freezed ? _value.id : id as String,
       longitude: longitude == freezed ? _value.longitude : longitude as double,
       latitude: latitude == freezed ? _value.latitude : latitude as double,
-      level0: level0 == freezed ? _value.level0 : level0 as int,
-      level1: level1 == freezed ? _value.level1 : level1 as int,
-      level2: level2 == freezed ? _value.level2 : level2 as int,
-      level3: level3 == freezed ? _value.level3 : level3 as int,
-      level4: level4 == freezed ? _value.level4 : level4 as int,
-      level5: level5 == freezed ? _value.level5 : level5 as int,
-      level6: level6 == freezed ? _value.level6 : level6 as int,
-      level7: level7 == freezed ? _value.level7 : level7 as int,
-      level8: level8 == freezed ? _value.level8 : level8 as int,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      level0: level0 == freezed ? _value.level0 : level0 as String,
+      level1: level1 == freezed ? _value.level1 : level1 as String,
+      level2: level2 == freezed ? _value.level2 : level2 as String,
+      level3: level3 == freezed ? _value.level3 : level3 as String,
+      level4: level4 == freezed ? _value.level4 : level4 as String,
+      level5: level5 == freezed ? _value.level5 : level5 as String,
+      level6: level6 == freezed ? _value.level6 : level6 as String,
+      level7: level7 == freezed ? _value.level7 : level7 as String,
+      level8: level8 == freezed ? _value.level8 : level8 as String,
     ));
   }
 
@@ -171,15 +179,16 @@ abstract class _$ThreadCopyWith<$Res> implements $ThreadCopyWith<$Res> {
       String id,
       double longitude,
       double latitude,
-      int level0,
-      int level1,
-      int level2,
-      int level3,
-      int level4,
-      int level5,
-      int level6,
-      int level7,
-      int level8});
+      @TimestampConverter() DateTime createdAt,
+      String level0,
+      String level1,
+      String level2,
+      String level3,
+      String level4,
+      String level5,
+      String level6,
+      String level7,
+      String level8});
 
   @override
   $ProfileCopyWith<$Res> get authorProfile;
@@ -201,6 +210,7 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
     Object id = freezed,
     Object longitude = freezed,
     Object latitude = freezed,
+    Object createdAt = freezed,
     Object level0 = freezed,
     Object level1 = freezed,
     Object level2 = freezed,
@@ -219,15 +229,17 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as String,
       longitude: longitude == freezed ? _value.longitude : longitude as double,
       latitude: latitude == freezed ? _value.latitude : latitude as double,
-      level0: level0 == freezed ? _value.level0 : level0 as int,
-      level1: level1 == freezed ? _value.level1 : level1 as int,
-      level2: level2 == freezed ? _value.level2 : level2 as int,
-      level3: level3 == freezed ? _value.level3 : level3 as int,
-      level4: level4 == freezed ? _value.level4 : level4 as int,
-      level5: level5 == freezed ? _value.level5 : level5 as int,
-      level6: level6 == freezed ? _value.level6 : level6 as int,
-      level7: level7 == freezed ? _value.level7 : level7 as int,
-      level8: level8 == freezed ? _value.level8 : level8 as int,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      level0: level0 == freezed ? _value.level0 : level0 as String,
+      level1: level1 == freezed ? _value.level1 : level1 as String,
+      level2: level2 == freezed ? _value.level2 : level2 as String,
+      level3: level3 == freezed ? _value.level3 : level3 as String,
+      level4: level4 == freezed ? _value.level4 : level4 as String,
+      level5: level5 == freezed ? _value.level5 : level5 as String,
+      level6: level6 == freezed ? _value.level6 : level6 as String,
+      level7: level7 == freezed ? _value.level7 : level7 as String,
+      level8: level8 == freezed ? _value.level8 : level8 as String,
     ));
   }
 }
@@ -242,6 +254,7 @@ class _$_Thread implements _Thread {
       @required this.id,
       @required this.longitude,
       @required this.latitude,
+      @TimestampConverter() this.createdAt,
       @required this.level0,
       @required this.level1,
       @required this.level2,
@@ -280,27 +293,30 @@ class _$_Thread implements _Thread {
   @override
   final double latitude;
   @override
-  final int level0;
+  @TimestampConverter()
+  final DateTime createdAt;
   @override
-  final int level1;
+  final String level0;
   @override
-  final int level2;
+  final String level1;
   @override
-  final int level3;
+  final String level2;
   @override
-  final int level4;
+  final String level3;
   @override
-  final int level5;
+  final String level4;
   @override
-  final int level6;
+  final String level5;
   @override
-  final int level7;
+  final String level6;
   @override
-  final int level8;
+  final String level7;
+  @override
+  final String level8;
 
   @override
   String toString() {
-    return 'Thread(name: $name, authorProfile: $authorProfile, id: $id, longitude: $longitude, latitude: $latitude, level0: $level0, level1: $level1, level2: $level2, level3: $level3, level4: $level4, level5: $level5, level6: $level6, level7: $level7, level8: $level8)';
+    return 'Thread(name: $name, authorProfile: $authorProfile, id: $id, longitude: $longitude, latitude: $latitude, createdAt: $createdAt, level0: $level0, level1: $level1, level2: $level2, level3: $level3, level4: $level4, level5: $level5, level6: $level6, level7: $level7, level8: $level8)';
   }
 
   @override
@@ -320,6 +336,9 @@ class _$_Thread implements _Thread {
             (identical(other.latitude, latitude) ||
                 const DeepCollectionEquality()
                     .equals(other.latitude, latitude)) &&
+            (identical(other.createdAt, createdAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdAt, createdAt)) &&
             (identical(other.level0, level0) ||
                 const DeepCollectionEquality().equals(other.level0, level0)) &&
             (identical(other.level1, level1) ||
@@ -348,6 +367,7 @@ class _$_Thread implements _Thread {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(longitude) ^
       const DeepCollectionEquality().hash(latitude) ^
+      const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(level0) ^
       const DeepCollectionEquality().hash(level1) ^
       const DeepCollectionEquality().hash(level2) ^
@@ -375,15 +395,16 @@ abstract class _Thread implements Thread {
       @required String id,
       @required double longitude,
       @required double latitude,
-      @required int level0,
-      @required int level1,
-      @required int level2,
-      @required int level3,
-      @required int level4,
-      @required int level5,
-      @required int level6,
-      @required int level7,
-      @required int level8}) = _$_Thread;
+      @TimestampConverter() DateTime createdAt,
+      @required String level0,
+      @required String level1,
+      @required String level2,
+      @required String level3,
+      @required String level4,
+      @required String level5,
+      @required String level6,
+      @required String level7,
+      @required String level8}) = _$_Thread;
 
   factory _Thread.fromJson(Map<String, dynamic> json) = _$_Thread.fromJson;
 
@@ -398,23 +419,26 @@ abstract class _Thread implements Thread {
   @override
   double get latitude;
   @override
-  int get level0;
+  @TimestampConverter()
+  DateTime get createdAt;
   @override
-  int get level1;
+  String get level0;
   @override
-  int get level2;
+  String get level1;
   @override
-  int get level3;
+  String get level2;
   @override
-  int get level4;
+  String get level3;
   @override
-  int get level5;
+  String get level4;
   @override
-  int get level6;
+  String get level5;
   @override
-  int get level7;
+  String get level6;
   @override
-  int get level8;
+  String get level7;
+  @override
+  String get level8;
   @override
   _$ThreadCopyWith<_Thread> get copyWith;
 }

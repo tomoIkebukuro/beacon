@@ -19,12 +19,20 @@ Future<void> showCustomDialog(
   );
 }
 
-int getGeoqueryAddress({
+int getLatitudeAddress({
   @required double latitude,
+  @required int level,
+}) {
+  return (latitude / 180 * (pi * earthRadius / pow(10, level).floor()).floor())
+      .floor();
+}
+
+int getLongitudeAddress({
   @required double longitude,
   @required int level,
 }) {
-  return (latitude / 180 * (pi * earthRadius / pow(10, level - 1)).floor())
+  return (longitude /
+          360 *
+          (2 * pi * earthRadius / pow(10, level).floor()).floor())
       .floor();
-  return (latitude / 180 * (pi * earthRadius / pow(10, level - 1))).floor();
 }

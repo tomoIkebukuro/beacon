@@ -14,7 +14,7 @@ class _$GeoqueryRangeStateTearOff {
   const _$GeoqueryRangeStateTearOff();
 
 // ignore: unused_element
-  _GeoqueryRangeState call({int level = 8, String symbol = ''}) {
+  _GeoqueryRangeState call({int level = 8, @required String symbol}) {
     return _GeoqueryRangeState(
       level: level,
       symbol: symbol,
@@ -98,14 +98,13 @@ class __$GeoqueryRangeStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_GeoqueryRangeState implements _GeoqueryRangeState {
-  const _$_GeoqueryRangeState({this.level = 8, this.symbol = ''})
+  const _$_GeoqueryRangeState({this.level = 8, @required this.symbol})
       : assert(level != null),
         assert(symbol != null);
 
   @JsonKey(defaultValue: 8)
   @override
   final int level;
-  @JsonKey(defaultValue: '')
   @override
   final String symbol;
 
@@ -136,7 +135,7 @@ class _$_GeoqueryRangeState implements _GeoqueryRangeState {
 }
 
 abstract class _GeoqueryRangeState implements GeoqueryRangeState {
-  const factory _GeoqueryRangeState({int level, String symbol}) =
+  const factory _GeoqueryRangeState({int level, @required String symbol}) =
       _$_GeoqueryRangeState;
 
   @override

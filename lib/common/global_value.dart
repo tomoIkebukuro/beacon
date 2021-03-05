@@ -7,7 +7,3 @@ List<Thread> favorites=[];
 double currentLatitude;
 double currentLongitude;
 
-enum SortWith{
-  createdAt,
-  buzz,
-}

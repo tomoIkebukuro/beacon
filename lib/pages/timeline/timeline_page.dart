@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:beacon_sns/class/geoquery_range/geoquery_range_notifier.dart';
 import 'package:beacon_sns/class/index.dart';
+import 'package:beacon_sns/class/sort_with/sort_with.dart';
 import 'package:beacon_sns/class/timeline/timeline_state.dart';
 import 'package:beacon_sns/common/functions.dart';
 import 'package:beacon_sns/common/global_value.dart';
@@ -130,19 +131,28 @@ class _TimelinePageState extends State<TimelinePage> {
                                   color: Colors.deepOrange,
                                 ),
                                 onChanged: (String newValue) async {
+                                  if (newValue == 'null') {
+                                    context
+                                        .read(timelineProvider)
+                                        .set(threads: []);
+                                    return;
+                                  }
                                   final level = context
                                       .read(geoQueryRangeProvider.state)
                                       .level;
-                                  try{
+
+                                  final sortWith = context
+                                      .read(sortWithProvider)
+                                      .state
+                                      .sortWith;
+                                  try {
                                     await context.read(timelineProvider).update(
-                                      currentLatitude: currentLatitude,
-                                      currentLongitude: currentLongitude,
-                                      level: level,
-                                      sortWith: SortWith.buzz,
-                                    );
-                                  }
-                                  catch(e){
-                                  }
+                                          currentLatitude: currentLatitude,
+                                          currentLongitude: currentLongitude,
+                                          level: level,
+                                          sortWith: sortWith,
+                                        );
+                                  } catch (e) {}
 
                                   await context
                                       .read(geoQueryRangeProvider)
@@ -163,8 +173,10 @@ class _TimelinePageState extends State<TimelinePage> {
                           Consumer(
                             builder: (context, watch, child) {
                               return DropdownButton<String>(
-                                value:
-                                '評価順',
+                                value: watch(sortWithProvider.state).sortWith ==
+                                        SortWith.buzz
+                                    ? '評価順'
+                                    : '新しい順',
                                 icon: Icon(Icons.arrow_drop_down),
                                 iconSize: 24,
                                 elevation: 16,
@@ -174,15 +186,29 @@ class _TimelinePageState extends State<TimelinePage> {
                                   color: Colors.deepOrange,
                                 ),
                                 onChanged: (String newValue) async {
+                                  print(newValue);
+                                  if (newValue == '評価順') {
+                                    context
+                                        .read(sortWithProvider)
+                                        .orderByBuzz();
+                                  } else {
+                                    context
+                                        .read(sortWithProvider)
+                                        .orderByCreatedAt();
+                                  }
                                 },
-                                items: ['評価順','新しい順']
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value,style: TextStyle(fontSize: 15),),
-                                      );
-                                    }).toList(),
+                                items: [
+                                  '評価順',
+                                  '新しい順'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                  );
+                                }).toList(),
                               );
                             },
                           ),

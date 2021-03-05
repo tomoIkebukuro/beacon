@@ -15,6 +15,7 @@ class GeoqueryRangeNotifier extends StateNotifier<GeoqueryRangeState> {
     '100km',
     '1000km',
     '10000km',
+    'null',
   ];
 
   static const availableSymbol = [
@@ -24,6 +25,7 @@ class GeoqueryRangeNotifier extends StateNotifier<GeoqueryRangeState> {
     '100km',
     '1000km',
     '10000km',
+    'null',
   ];
 
   void update({

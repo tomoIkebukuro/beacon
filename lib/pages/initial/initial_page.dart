@@ -1,5 +1,6 @@
 import 'package:beacon_sns/class/geoquery_range/geoquery_range_state.dart';
 import 'package:beacon_sns/class/profile/profile.dart';
+import 'package:beacon_sns/class/sort_with/sort_with.dart';
 import 'package:beacon_sns/class/thread/thread.dart';
 import 'package:beacon_sns/class/timeline/timeline_notifier.dart';
 import 'package:beacon_sns/common/functions.dart';
