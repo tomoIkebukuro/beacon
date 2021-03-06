@@ -1,6 +1,7 @@
 import 'package:beacon_sns/pages/set_profile/set_profile_notifier.dart';
 import 'package:beacon_sns/pages/set_thread/set_thread_notifier.dart';
 import 'package:beacon_sns/pages/set_thread/set_thread_state.dart';
+import 'package:beacon_sns/repository/server.dart';
 import 'package:beacon_sns/widgets/custom_textform_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class SetThreadPage extends StatefulWidget {
     return MultiProvider(
       providers: [
         StateNotifierProvider<SetThreadNotifier, SetThreadState>(
-          create: (context) => SetThreadNotifier(),
+          create: (context) => SetThreadNotifier(serverRepository: serverRepository),
         ),
       ],
       child: SetThreadPage(),

@@ -70,7 +70,7 @@ class ServerRepository {
     if (sortWith == SortWith.buzz) {
       query = await FirebaseFirestore.instance
           .collection('threads')
-          .orderBy('buzz')
+
           .where('level$level', whereIn: addresses)
           .limit(20)
           .get();

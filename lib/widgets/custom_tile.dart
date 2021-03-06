@@ -74,9 +74,7 @@ class CustomThreadTile extends StatelessWidget {
                                   size: 18,
                                 ),
                               ),
-                              Text(Random().nextInt(100) % 2 == 0
-                                  ? '1.2K'
-                                  : '100'),
+                              Text(thread.buzz.toString()),
                             ],
                             mainAxisSize: MainAxisSize.min,
                           ),

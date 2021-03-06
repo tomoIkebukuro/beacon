@@ -24,6 +24,8 @@ class _$ThreadTearOff {
       @required double longitude,
       @required double latitude,
       @TimestampConverter() DateTime createdAt,
+      @required int buzz,
+      @required int commentNum,
       @required String level0,
       @required String level1,
       @required String level2,
@@ -40,6 +42,8 @@ class _$ThreadTearOff {
       longitude: longitude,
       latitude: latitude,
       createdAt: createdAt,
+      buzz: buzz,
+      commentNum: commentNum,
       level0: level0,
       level1: level1,
       level2: level2,
@@ -71,6 +75,8 @@ mixin _$Thread {
   double get latitude;
   @TimestampConverter()
   DateTime get createdAt;
+  int get buzz;
+  int get commentNum;
   String get level0;
   String get level1;
   String get level2;
@@ -96,6 +102,8 @@ abstract class $ThreadCopyWith<$Res> {
       double longitude,
       double latitude,
       @TimestampConverter() DateTime createdAt,
+      int buzz,
+      int commentNum,
       String level0,
       String level1,
       String level2,
@@ -125,6 +133,8 @@ class _$ThreadCopyWithImpl<$Res> implements $ThreadCopyWith<$Res> {
     Object longitude = freezed,
     Object latitude = freezed,
     Object createdAt = freezed,
+    Object buzz = freezed,
+    Object commentNum = freezed,
     Object level0 = freezed,
     Object level1 = freezed,
     Object level2 = freezed,
@@ -145,6 +155,8 @@ class _$ThreadCopyWithImpl<$Res> implements $ThreadCopyWith<$Res> {
       latitude: latitude == freezed ? _value.latitude : latitude as double,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      buzz: buzz == freezed ? _value.buzz : buzz as int,
+      commentNum: commentNum == freezed ? _value.commentNum : commentNum as int,
       level0: level0 == freezed ? _value.level0 : level0 as String,
       level1: level1 == freezed ? _value.level1 : level1 as String,
       level2: level2 == freezed ? _value.level2 : level2 as String,
@@ -180,6 +192,8 @@ abstract class _$ThreadCopyWith<$Res> implements $ThreadCopyWith<$Res> {
       double longitude,
       double latitude,
       @TimestampConverter() DateTime createdAt,
+      int buzz,
+      int commentNum,
       String level0,
       String level1,
       String level2,
@@ -211,6 +225,8 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
     Object longitude = freezed,
     Object latitude = freezed,
     Object createdAt = freezed,
+    Object buzz = freezed,
+    Object commentNum = freezed,
     Object level0 = freezed,
     Object level1 = freezed,
     Object level2 = freezed,
@@ -231,6 +247,8 @@ class __$ThreadCopyWithImpl<$Res> extends _$ThreadCopyWithImpl<$Res>
       latitude: latitude == freezed ? _value.latitude : latitude as double,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      buzz: buzz == freezed ? _value.buzz : buzz as int,
+      commentNum: commentNum == freezed ? _value.commentNum : commentNum as int,
       level0: level0 == freezed ? _value.level0 : level0 as String,
       level1: level1 == freezed ? _value.level1 : level1 as String,
       level2: level2 == freezed ? _value.level2 : level2 as String,
@@ -255,6 +273,8 @@ class _$_Thread implements _Thread {
       @required this.longitude,
       @required this.latitude,
       @TimestampConverter() this.createdAt,
+      @required this.buzz,
+      @required this.commentNum,
       @required this.level0,
       @required this.level1,
       @required this.level2,
@@ -269,6 +289,8 @@ class _$_Thread implements _Thread {
         assert(id != null),
         assert(longitude != null),
         assert(latitude != null),
+        assert(buzz != null),
+        assert(commentNum != null),
         assert(level0 != null),
         assert(level1 != null),
         assert(level2 != null),
@@ -296,6 +318,10 @@ class _$_Thread implements _Thread {
   @TimestampConverter()
   final DateTime createdAt;
   @override
+  final int buzz;
+  @override
+  final int commentNum;
+  @override
   final String level0;
   @override
   final String level1;
@@ -316,7 +342,7 @@ class _$_Thread implements _Thread {
 
   @override
   String toString() {
-    return 'Thread(name: $name, authorProfile: $authorProfile, id: $id, longitude: $longitude, latitude: $latitude, createdAt: $createdAt, level0: $level0, level1: $level1, level2: $level2, level3: $level3, level4: $level4, level5: $level5, level6: $level6, level7: $level7, level8: $level8)';
+    return 'Thread(name: $name, authorProfile: $authorProfile, id: $id, longitude: $longitude, latitude: $latitude, createdAt: $createdAt, buzz: $buzz, commentNum: $commentNum, level0: $level0, level1: $level1, level2: $level2, level3: $level3, level4: $level4, level5: $level5, level6: $level6, level7: $level7, level8: $level8)';
   }
 
   @override
@@ -339,6 +365,11 @@ class _$_Thread implements _Thread {
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
+            (identical(other.buzz, buzz) ||
+                const DeepCollectionEquality().equals(other.buzz, buzz)) &&
+            (identical(other.commentNum, commentNum) ||
+                const DeepCollectionEquality()
+                    .equals(other.commentNum, commentNum)) &&
             (identical(other.level0, level0) ||
                 const DeepCollectionEquality().equals(other.level0, level0)) &&
             (identical(other.level1, level1) ||
@@ -368,6 +399,8 @@ class _$_Thread implements _Thread {
       const DeepCollectionEquality().hash(longitude) ^
       const DeepCollectionEquality().hash(latitude) ^
       const DeepCollectionEquality().hash(createdAt) ^
+      const DeepCollectionEquality().hash(buzz) ^
+      const DeepCollectionEquality().hash(commentNum) ^
       const DeepCollectionEquality().hash(level0) ^
       const DeepCollectionEquality().hash(level1) ^
       const DeepCollectionEquality().hash(level2) ^
@@ -396,6 +429,8 @@ abstract class _Thread implements Thread {
       @required double longitude,
       @required double latitude,
       @TimestampConverter() DateTime createdAt,
+      @required int buzz,
+      @required int commentNum,
       @required String level0,
       @required String level1,
       @required String level2,
@@ -421,6 +456,10 @@ abstract class _Thread implements Thread {
   @override
   @TimestampConverter()
   DateTime get createdAt;
+  @override
+  int get buzz;
+  @override
+  int get commentNum;
   @override
   String get level0;
   @override

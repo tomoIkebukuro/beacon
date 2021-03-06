@@ -170,25 +170,59 @@ class _InitialPageState extends State<InitialPage> {
   }
 
   Future<void> checkFavorites() async {
+    List<dynamic> favoritesJson;
+    List<Thread> _favorites = <Thread>[];
+    List<Map<String,dynamic>> jsons=<Map<String,dynamic>>[];
+    final prefs = await SharedPreferences.getInstance();
     try {
-      final prefs = await SharedPreferences.getInstance();
       final data = prefs.getString('favorites');
-      print(data);
       if (data == null) return;
-      final favoritesJson = json.decode(data) as List<dynamic>;
+      favoritesJson = json.decode(data) as List<dynamic>;
       favorites = favoritesJson
           .map<Thread>(
             (dynamic e) => Thread.fromJson(e as Map<String, dynamic>),
           )
           .toList() as List<Thread>;
+      return;
     } catch (e) {
-      print(e.toString());
       await showCustomDialog(
-          context: context, title: 'エラー', discription: 'お気に入りの');
+          context: context, title: 'エラー', discription: 'お気に入りのデータが破損しているため修復します。');
     }
+
+    try {
+      for (var json in favoritesJson as List<Map<String, String>>) {
+        final thread=await serverRepository.getThread(id: json['id']);
+        if(thread!=null){
+          _favorites.add(thread);
+        }
+
+      }
+    } catch (e) {
+      await showCustomDialog(
+          context: context,
+          title: 'エラー',
+          discription: 'サーバに接続できなかったためお気に入りを復元できませんでした。');
+      favorites = [];
+      return;
+    }
+    try{
+      prefs.setString('favorites', json.encode(favorites));
+      favorites=_favorites;
+    }
+    catch(e){
+      await showCustomDialog(
+          context: context,
+          title: 'エラー',
+          discription: 'サーバに接続できなかったためお気に入りを復元できませんでした。');
+      favorites = [];
+      return;
+    }
+
 
     return;
   }
+
+  Future<void> _recoverLocalData() async {}
 
   Future<void> checkTimeline() async {
     //TODO:

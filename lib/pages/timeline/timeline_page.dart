@@ -105,7 +105,7 @@ class _TimelinePageState extends State<TimelinePage> {
         onLoading: _onLoading,
         child: Consumer(
           builder: (context, watch, child) {
-            final threads = watch(timelineProvider).state.threads;
+            final threads = watch(timelineProvider.state).threads;
             return ListView.builder(
               itemCount: threads.length + 1,
               itemBuilder: (context, index) {

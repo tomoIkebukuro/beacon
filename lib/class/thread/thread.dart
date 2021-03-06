@@ -21,6 +21,8 @@ abstract class Thread with _$Thread {
     @required double longitude,
     @required double latitude,
     @TimestampConverter() DateTime createdAt,
+    @required int buzz,
+    @required int commentNum,
     @required String level0,
     @required String level1,
     @required String level2,
@@ -35,6 +37,7 @@ abstract class Thread with _$Thread {
   factory Thread.fromLatLong({
     @required String name,
     @required Profile authorProfile,
+    @required int buzz,
     @required double longitude,
     @required double latitude,
   }) {
@@ -49,6 +52,8 @@ abstract class Thread with _$Thread {
       name: name,
       authorProfile: authorProfile,
       id: id,
+      buzz: buzz,
+      commentNum: 0,
       latitude: latitude,
       longitude: longitude,
       level0: levels[0],

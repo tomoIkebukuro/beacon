@@ -17,6 +17,8 @@ _$_Thread _$_$_ThreadFromJson(Map<String, dynamic> json) {
     latitude: (json['latitude'] as num)?.toDouble(),
     createdAt:
         const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
+    buzz: json['buzz'] as int,
+    commentNum: json['commentNum'] as int,
     level0: json['level0'] as String,
     level1: json['level1'] as String,
     level2: json['level2'] as String,
@@ -36,6 +38,8 @@ Map<String, dynamic> _$_$_ThreadToJson(_$_Thread instance) => <String, dynamic>{
       'longitude': instance.longitude,
       'latitude': instance.latitude,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'buzz': instance.buzz,
+      'commentNum': instance.commentNum,
       'level0': instance.level0,
       'level1': instance.level1,
       'level2': instance.level2,
