@@ -8,6 +8,7 @@ abstract class Profile with _$Profile {
     String id,
     String name,
     String avatarUrl,
+    int buzz,
   }) = _Profile;
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
