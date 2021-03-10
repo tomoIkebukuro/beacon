@@ -1,16 +1,11 @@
-# beacon_sns
+### アプリの概要
+現在地周辺の人と会話できるSNSアプリです。投稿したコメントを地図上で確認したり範囲を絞って投稿を検索することができます。
 
-A new Flutter application.
+### なぜ作ったのか
+私は幼少期より引っ越しや転校が多く地元との繋がりも薄かったので、住んでいる場所のことや地元の人との繋がりを持ちたいと思っていました。しかし、それを実現するアプリがまだ世に存在していなかったので自分で作ることにしました。
 
-## Getting Started
+### 機能
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://user-images.githubusercontent.com/59225570/110620652-99ea7600-81dc-11eb-9b9e-93345b0de048.png" width="300">
+<img src="https://user-images.githubusercontent.com/59225570/110620668-9eaf2a00-81dc-11eb-8386-a79bb7767189.gif" width="300">
+<img src="https://user-images.githubusercontent.com/59225570/110620671-a078ed80-81dc-11eb-9bd7-5c3e4887ca75.gif" width="300">
