@@ -17,5 +17,10 @@ SNS認証を使ってユーザ認証を行います。現在google,twitterアカ
 <img src="https://user-images.githubusercontent.com/59225570/110620668-9eaf2a00-81dc-11eb-8386-a79bb7767189.gif" width="300">
 
 
-- 投稿機能
+- タイムライン&投稿機能
+
 <img src="https://user-images.githubusercontent.com/59225570/110620671-a078ed80-81dc-11eb-9bd7-5c3e4887ca75.gif" width="300">
+
+- 投稿の位置情報確認機能
+
+<img src="https://user-images.githubusercontent.com/59225570/110623768-ad97db80-81e0-11eb-9779-4557956d4754.png" width="300">
